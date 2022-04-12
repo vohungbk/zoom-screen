@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/zoom-screen/static/css/main.e8b64e87.css",
+    "main.js": "/zoom-screen/static/js/main.3f4a3ca8.js",
+    "index.html": "/zoom-screen/index.html",
+    "main.e8b64e87.css.map": "/zoom-screen/static/css/main.e8b64e87.css.map",
+    "main.3f4a3ca8.js.map": "/zoom-screen/static/js/main.3f4a3ca8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e8b64e87.css",
+    "static/js/main.3f4a3ca8.js"
+  ]
+}
