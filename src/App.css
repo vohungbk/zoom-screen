@@ -1,0 +1,17 @@
+.App {
+  background: #eee;
+  padding: 100px;
+}
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 300px;
+  position: fixed;
+  bottom: 0;
+  right: 30px;
+}
+
+.slider .value {
+  margin-right: 20px;
+}
