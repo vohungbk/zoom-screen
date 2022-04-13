@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { Stage, Layer, Rect } from "react-konva";
-import styled from "styled-components";
+import Slider from "@mui/material/Slider";
 
-const StyledPage = styled.div`
-  background: #fff;
-  position: relative;
-  transform-origin: top;
-`;
 const MAIN_BACKGROUND_LAYER = {
   opacity: 255,
   hidden: false,
@@ -14,29 +9,47 @@ const MAIN_BACKGROUND_LAYER = {
   id: 1952,
   type: "layer",
   width: 500,
+  height: 500,
 };
 
-export const Page = (props) => {
+export const Page = () => {
   const stageRef = React.useRef();
-  const zoom = props?.zoom / 100;
+  const [state, setState] = useState({
+    stageScale: 0.1,
+    stageX: window.innerWidth / 2 - 25,
+    stageY: window.innerHeight / 2 - 25,
+    sliderValue: 10,
+  });
 
-  React.useEffect(() => {
-    stageRef.current.content.style.background = "#fff";
-  }, [props.zoom]);
+  const handleChange = (e, newValue) => {
+    e.preventDefault();
+    const stage = stageRef.current;
+    const oldScale = stage.scaleX();
+    const mousePointTo = {
+      x: window.innerWidth / 2 / oldScale - stage.x() / oldScale,
+      y: window.innerHeight / 2 / oldScale - stage.y() / oldScale,
+    };
+    const newScale = newValue / 100;
+    setState({
+      stageScale: newScale,
+      stageX: (window.innerWidth / 2 / newScale - mousePointTo.x) * newScale,
+      stageY: (window.innerHeight / 2 / newScale - mousePointTo.y) * newScale,
+      sliderValue: newValue,
+    });
+  };
 
   return (
-    <StyledPage zoom={zoom}>
-      <Stage width={800} height={800} ref={stageRef}>
+    <>
+      <Stage width={3000} height={3000} ref={stageRef} scaleX={state.stageScale} scaleY={state.stageScale} x={state.stageX} y={state.stageY}>
         <Layer>
-          <Rect
-            x={MAIN_BACKGROUND_LAYER.left}
-            y={MAIN_BACKGROUND_LAYER.top}
-            width={MAIN_BACKGROUND_LAYER.width}
-            height={MAIN_BACKGROUND_LAYER.height}
-            fill="#fff"
-          />
+          <Rect width={MAIN_BACKGROUND_LAYER.width} height={MAIN_BACKGROUND_LAYER.height} fill="#fff" />
         </Layer>
       </Stage>
-    </StyledPage>
+
+      <div className="slider">
+        <p className="value">{state.sliderValue}%</p>
+        <Slider aria-label="Volume" value={state.sliderValue} onChange={handleChange} max={500} min={10} />
+      </div>
+    </>
   );
 };
