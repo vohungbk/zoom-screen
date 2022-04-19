@@ -1,16 +1,7 @@
 .App {
   background: #eee;
-  margin: auto;
   transition: all 2s ease-in-out;
-  height: 100%;
-  overflow: scroll;
-  /* max-height: 100vh; */
-}
-html,
-body,
-#root {
-  height: 100%;
-  overflow: auto;
+  width: fit-content;
 }
 
 .slider {
@@ -25,4 +16,18 @@ body,
 
 .slider .value {
   margin-right: 20px;
+}
+
+.konvajs-content {
+  /* width: 100% !important;   */
+  display: flex;
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  pointer-events: none;
+}
+
+canvas {
+  /* width: 100% !important;
+  height: 100% !important; */
 }
